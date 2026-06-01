@@ -6,14 +6,103 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3D57C0352FCCE8930063D973 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D57C0342FCCE8930063D973 /* WidgetKit.framework */; };
+		3D57C0372FCCE8930063D973 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D57C0362FCCE8930063D973 /* SwiftUI.framework */; };
+		3D57C0462FCCE8950063D973 /* QuadrantTasksWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3D57C0322FCCE8930063D973 /* QuadrantTasksWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D57C0442FCCE8950063D973 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D57BF312FCCA70D0063D973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D57C0312FCCE8930063D973;
+			remoteInfo = QuadrantTasksWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3D57C04B2FCCE8950063D973 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3D57C0462FCCE8950063D973 /* QuadrantTasksWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3D57BF392FCCA70D0063D973 /* QuadrantTasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadrantTasks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D57BFFD2FCCC3C70063D973 /* QuadrantTasksIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadrantTasksIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D57C0322FCCE8930063D973 /* QuadrantTasksWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuadrantTasksWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D57C0342FCCE8930063D973 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		3D57C0362FCCE8930063D973 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3D57C04D2FCCE94C0063D973 /* QuadrantTasksWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuadrantTasksWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3D57C00C2FCCC5E20063D973 /* Exceptions for "QuadrantTasks" folder in "QuadrantTasksIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Quadrant.swift,
+				Models/TaskItem.swift,
+				Services/NotificationService.swift,
+				ViewModels/TaskViewModel.swift,
+			);
+			target = 3D57BFFC2FCCC3C70063D973 /* QuadrantTasksIOS */;
+		};
+		3D57C04A2FCCE8950063D973 /* Exceptions for "QuadrantTasksWidget" folder in "QuadrantTasksWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3D57C0312FCCE8930063D973 /* QuadrantTasksWidgetExtension */;
+		};
+		3D57C0522FCCE9940063D973 /* Exceptions for "QuadrantTasksIOS" folder in "QuadrantTasksWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AppGroupConfig.swift,
+			);
+			target = 3D57C0312FCCE8930063D973 /* QuadrantTasksWidgetExtension */;
+		};
+		3D57C0592FCCEE110063D973 /* Exceptions for "QuadrantTasksWidget" folder in "QuadrantTasksIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WidgetSnapshotStore.swift,
+			);
+			target = 3D57BFFC2FCCC3C70063D973 /* QuadrantTasksIOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3D57BF3B2FCCA70D0063D973 /* QuadrantTasks */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3D57C00C2FCCC5E20063D973 /* Exceptions for "QuadrantTasks" folder in "QuadrantTasksIOS" target */,
+			);
 			path = QuadrantTasks;
+			sourceTree = "<group>";
+		};
+		3D57BFFE2FCCC3C70063D973 /* QuadrantTasksIOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3D57C0522FCCE9940063D973 /* Exceptions for "QuadrantTasksIOS" folder in "QuadrantTasksWidgetExtension" target */,
+			);
+			path = QuadrantTasksIOS;
+			sourceTree = "<group>";
+		};
+		3D57C0382FCCE8930063D973 /* QuadrantTasksWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3D57C0592FCCEE110063D973 /* Exceptions for "QuadrantTasksWidget" folder in "QuadrantTasksIOS" target */,
+				3D57C04A2FCCE8950063D973 /* Exceptions for "QuadrantTasksWidget" folder in "QuadrantTasksWidgetExtension" target */,
+			);
+			path = QuadrantTasksWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +115,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D57BFFA2FCCC3C70063D973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D57C02F2FCCE8930063D973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D57C0372FCCE8930063D973 /* SwiftUI.framework in Frameworks */,
+				3D57C0352FCCE8930063D973 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3D57BF302FCCA70D0063D973 = {
 			isa = PBXGroup;
 			children = (
+				3D57C04D2FCCE94C0063D973 /* QuadrantTasksWidgetExtension.entitlements */,
 				3D57BF3B2FCCA70D0063D973 /* QuadrantTasks */,
+				3D57BFFE2FCCC3C70063D973 /* QuadrantTasksIOS */,
+				3D57C0382FCCE8930063D973 /* QuadrantTasksWidget */,
+				3D57C0332FCCE8930063D973 /* Frameworks */,
 				3D57BF3A2FCCA70D0063D973 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +150,19 @@
 			isa = PBXGroup;
 			children = (
 				3D57BF392FCCA70D0063D973 /* QuadrantTasks.app */,
+				3D57BFFD2FCCC3C70063D973 /* QuadrantTasksIOS.app */,
+				3D57C0322FCCE8930063D973 /* QuadrantTasksWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3D57C0332FCCE8930063D973 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D57C0342FCCE8930063D973 /* WidgetKit.framework */,
+				3D57C0362FCCE8930063D973 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,6 +190,52 @@
 			productReference = 3D57BF392FCCA70D0063D973 /* QuadrantTasks.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3D57BFFC2FCCC3C70063D973 /* QuadrantTasksIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D57C0072FCCC3C90063D973 /* Build configuration list for PBXNativeTarget "QuadrantTasksIOS" */;
+			buildPhases = (
+				3D57BFF92FCCC3C70063D973 /* Sources */,
+				3D57BFFA2FCCC3C70063D973 /* Frameworks */,
+				3D57BFFB2FCCC3C70063D973 /* Resources */,
+				3D57C04B2FCCE8950063D973 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D57C0452FCCE8950063D973 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3D57BFFE2FCCC3C70063D973 /* QuadrantTasksIOS */,
+			);
+			name = QuadrantTasksIOS;
+			packageProductDependencies = (
+			);
+			productName = QuadrantTasksIOS;
+			productReference = 3D57BFFD2FCCC3C70063D973 /* QuadrantTasksIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3D57C0312FCCE8930063D973 /* QuadrantTasksWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D57C0472FCCE8950063D973 /* Build configuration list for PBXNativeTarget "QuadrantTasksWidgetExtension" */;
+			buildPhases = (
+				3D57C02E2FCCE8930063D973 /* Sources */,
+				3D57C02F2FCCE8930063D973 /* Frameworks */,
+				3D57C0302FCCE8930063D973 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3D57C0382FCCE8930063D973 /* QuadrantTasksWidget */,
+			);
+			name = QuadrantTasksWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = QuadrantTasksWidgetExtension;
+			productReference = 3D57C0322FCCE8930063D973 /* QuadrantTasksWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -81,6 +247,12 @@
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					3D57BF382FCCA70D0063D973 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					3D57BFFC2FCCC3C70063D973 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					3D57C0312FCCE8930063D973 = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
@@ -100,12 +272,28 @@
 			projectRoot = "";
 			targets = (
 				3D57BF382FCCA70D0063D973 /* QuadrantTasks */,
+				3D57BFFC2FCCC3C70063D973 /* QuadrantTasksIOS */,
+				3D57C0312FCCE8930063D973 /* QuadrantTasksWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3D57BF372FCCA70D0063D973 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D57BFFB2FCCC3C70063D973 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D57C0302FCCE8930063D973 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +310,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D57BFF92FCCC3C70063D973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D57C02E2FCCE8930063D973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3D57C0452FCCE8950063D973 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D57C0312FCCE8930063D973 /* QuadrantTasksWidgetExtension */;
+			targetProxy = 3D57C0442FCCE8950063D973 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3D57BF442FCCA70E0063D973 /* Debug */ = {
@@ -182,6 +392,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "艾森豪威尔矩阵";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -238,6 +449,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "艾森豪威尔矩阵";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -255,6 +467,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -285,6 +498,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +514,146 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3D57C0052FCCC3C90063D973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuadrantTasksIOS/QuadrantTasksIOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D57C0062FCCC3C90063D973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuadrantTasksIOS/QuadrantTasksIOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D57C0482FCCE8950063D973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = QuadrantTasksWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuadrantTasksWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuadrantTasksWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS.QuadrantTasksWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D57C0492FCCE8950063D973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = QuadrantTasksWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuadrantTasksWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = QuadrantTasksWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS.QuadrantTasksWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -320,6 +674,24 @@
 			buildConfigurations = (
 				3D57BF472FCCA70E0063D973 /* Debug */,
 				3D57BF482FCCA70E0063D973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D57C0072FCCC3C90063D973 /* Build configuration list for PBXNativeTarget "QuadrantTasksIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D57C0052FCCC3C90063D973 /* Debug */,
+				3D57C0062FCCC3C90063D973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D57C0472FCCE8950063D973 /* Build configuration list for PBXNativeTarget "QuadrantTasksWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D57C0482FCCE8950063D973 /* Debug */,
+				3D57C0492FCCE8950063D973 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
