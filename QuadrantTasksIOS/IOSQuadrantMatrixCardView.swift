@@ -1,8 +1,23 @@
+//
+//  IOSQuadrantMatrixCardView.swift
+//  QuadrantTasksIOS
+//
+
 import SwiftUI
 
 struct IOSQuadrantMatrixCardView: View {
     let quadrant: Quadrant
     let tasks: [TaskItem]
+
+    @Environment(\.colorVisionMode) private var colorVisionMode
+
+    private var quadrantColor: Color {
+        quadrant.color(for: colorVisionMode)
+    }
+
+    private var overdueCount: Int {
+        tasks.filter(\.isOverdue).count
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -12,10 +27,9 @@ struct IOSQuadrantMatrixCardView: View {
                 Text(quadrant.title)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.primary)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.82)
+                    .lineLimit(1)
 
-                Text(quadrant.subtitle)
+                Text(quadrant.actionTitle)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -23,20 +37,17 @@ struct IOSQuadrantMatrixCardView: View {
 
             Divider()
 
-            taskPreview
-
-            Spacer(minLength: 0)
+            taskPreviewArea
         }
         .padding(12)
-        .frame(maxWidth: .infinity)
-        .aspectRatio(1, contentMode: .fit)
+        .frame(maxWidth: .infinity, minHeight: 190, maxHeight: 190, alignment: .topLeading)
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(Color(.secondarySystemGroupedBackground))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(quadrant.color.opacity(0.25), lineWidth: 1)
+                .stroke(quadrantColor.opacity(0.25), lineWidth: 1)
         )
     }
 
@@ -44,48 +55,76 @@ struct IOSQuadrantMatrixCardView: View {
         HStack {
             Image(systemName: quadrant.iconName)
                 .font(.headline)
-                .foregroundStyle(quadrant.color)
+                .foregroundStyle(quadrantColor)
 
             Spacer()
 
-            Text("\(tasks.count)")
-                .font(.subheadline.bold())
-                .foregroundStyle(quadrant.color)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 3)
-                .background(
-                    Capsule()
-                        .fill(quadrant.color.opacity(0.15))
-                )
+            HStack(spacing: 6) {
+                if overdueCount > 0 {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundStyle(AppColorPalette.overdueColor(for: colorVisionMode))
+                }
+
+                Text("\(tasks.count)")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(quadrantColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(
+                        Capsule()
+                            .fill(quadrantColor.opacity(0.15))
+                    )
+            }
         }
     }
 
     @ViewBuilder
-    private var taskPreview: some View {
+    private var taskPreviewArea: some View {
         if tasks.isEmpty {
             Text("暂无任务")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-                .lineLimit(1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         } else {
-            VStack(alignment: .leading, spacing: 5) {
-                ForEach(Array(tasks.prefix(2))) { task in
-                    HStack(spacing: 5) {
-                        Circle()
-                            .fill(task.isOverdue ? Color.red : quadrant.color.opacity(0.75))
-                            .frame(width: 5, height: 5)
-
-                        Text(task.title)
-                            .font(.caption2)
-                            .foregroundStyle(.primary)
-                            .lineLimit(1)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 7) {
+                    ForEach(tasks) { task in
+                        taskPreviewRow(task)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
 
-                if tasks.count > 2 {
-                    Text("还有 \(tasks.count - 2) 项")
-                        .font(.caption2)
+    private func taskPreviewRow(_ task: TaskItem) -> some View {
+        HStack(alignment: .top, spacing: 5) {
+            Circle()
+                .fill(task.isOverdue ? AppColorPalette.overdueColor(for: colorVisionMode) : quadrantColor.opacity(0.75))
+                .frame(width: 5, height: 5)
+                .padding(.top, 6)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(task.title)
+                    .font(.caption2)
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+
+                HStack(spacing: 4) {
+                    Text(task.timeStatusText)
+                        .font(.system(size: 9))
+                        .foregroundStyle(task.isOverdue ? AppColorPalette.overdueColor(for: colorVisionMode) : .secondary)
+                        .lineLimit(1)
+
+                    Text("·")
+                        .font(.system(size: 9))
                         .foregroundStyle(.secondary)
+
+                    Text("\(task.progressPercent)%")
+                        .font(.system(size: 9).monospacedDigit())
+                        .foregroundStyle(quadrantColor)
                 }
             }
         }

@@ -1,8 +1,14 @@
+//
+//  IOSQuadrantsHomeView.swift
+//  QuadrantTasksIOS
+//
+
 import SwiftUI
 import SwiftData
 
 struct IOSQuadrantsHomeView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorVisionMode) private var colorVisionMode
 
     @Query(sort: \TaskItem.updatedAt, order: .reverse)
     private var allTasks: [TaskItem]
@@ -18,13 +24,22 @@ struct IOSQuadrantsHomeView: View {
     ]
 
     private var layoutStyle: IOSHomeLayoutStyle {
-        IOSHomeLayoutStyle(rawValue: layoutStyleRaw) ?? .list
+        IOSHomeLayoutStyle(rawValue: layoutStyleRaw) ?? .matrix
+    }
+
+    private var pendingCount: Int {
+        allTasks.filter { !$0.isCompleted }.count
+    }
+
+    private var overdueCount: Int {
+        allTasks.filter { $0.isOverdue }.count
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header
+                quadrantSummaryStrip
 
                 switch layoutStyle {
                 case .list:
@@ -37,7 +52,7 @@ struct IOSQuadrantsHomeView: View {
             .padding()
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("森豪威尔矩阵")
+        .navigationTitle(AppInfo.displayName)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 layoutToggleButton
@@ -53,41 +68,107 @@ struct IOSQuadrantsHomeView: View {
         }
         .sheet(isPresented: $showingAddTask) {
             IOSAddTaskView(defaultQuadrant: .importantUrgent)
+                .environment(\.colorVisionMode, colorVisionMode)
         }
         .onAppear {
-            #if os(iOS)
-            WidgetDataService.refreshSnapshot(context: modelContext)
-            #endif
+            refreshWidgetSnapshot()
         }
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("今天应该先做什么？")
+            Text("今天先做什么？")
                 .font(.title2.bold())
 
-            Text("把任务按重要性和紧急性分类，先处理真正关键的事情。")
+            Text("从最值得投入的一件事开始，用四象限方法整理任务优先级。")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
             HStack(spacing: 8) {
-                Label(
-                    "\(allTasks.filter { !$0.isCompleted }.count) 项未完成",
-                    systemImage: "circle"
-                )
+                Label("\(pendingCount) 项未完成", systemImage: "circle")
 
                 Text("·")
 
-                Label(
-                    layoutStyle.title,
-                    systemImage: layoutStyle.systemImage
-                )
+                Label("四象限矩阵", systemImage: "square.grid.2x2")
+
+                if colorVisionMode == .colorBlindSafe {
+                    Text("·")
+                    Label("色盲友好", systemImage: "eye")
+                }
             }
             .font(.caption)
             .foregroundStyle(.secondary)
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var quadrantSummaryStrip: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(Quadrant.allCases) { quadrant in
+                    let count = pendingTasks(for: quadrant).count
+
+                    summaryIconPill(
+                        systemImage: quadrant.iconName,
+                        value: count,
+                        color: quadrant.color(for: colorVisionMode),
+                        accessibilityLabel: "\(quadrant.title)，\(count) 项"
+                    )
+                }
+
+                overdueTextPill
+            }
+            .padding(.vertical, 1)
+        }
+    }
+
+    private func summaryIconPill(
+        systemImage: String,
+        value: Int,
+        color: Color,
+        accessibilityLabel: String
+    ) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: systemImage)
+                .font(.caption.weight(.semibold))
+
+            Text("\(value)")
+                .font(.caption.weight(.bold))
+                .monospacedDigit()
+        }
+        .foregroundStyle(color)
+        .padding(.horizontal, 11)
+        .padding(.vertical, 7)
+        .background(
+            Capsule()
+                .fill(color.opacity(0.13))
+        )
+        .accessibilityLabel(accessibilityLabel)
+    }
+
+    private var overdueTextPill: some View {
+        let color = AppColorPalette.overdueColor(for: colorVisionMode)
+
+        return HStack(spacing: 6) {
+            Image(systemName: "clock.badge.exclamationmark")
+                .font(.caption.weight(.semibold))
+
+            Text("逾期")
+                .font(.caption.weight(.semibold))
+
+            Text("\(overdueCount)")
+                .font(.caption.weight(.bold))
+                .monospacedDigit()
+        }
+        .foregroundStyle(color)
+        .padding(.horizontal, 11)
+        .padding(.vertical, 7)
+        .background(
+            Capsule()
+                .fill(color.opacity(0.13))
+        )
+        .accessibilityLabel("逾期任务，\(overdueCount) 项")
     }
 
     private var layoutToggleButton: some View {
@@ -98,7 +179,6 @@ struct IOSQuadrantsHomeView: View {
                 .font(.title3)
         }
         .accessibilityLabel(layoutStyle == .list ? "切换为四象限矩阵" : "切换为一列列表")
-        .help(layoutStyle == .list ? "切换为四象限矩阵" : "切换为一列列表")
     }
 
     private var listLayout: some View {
@@ -119,11 +199,6 @@ struct IOSQuadrantsHomeView: View {
 
     private var matrixLayout: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("四象限视图")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.secondary)
-                .padding(.top, 4)
-
             LazyVGrid(columns: matrixColumns, spacing: 12) {
                 ForEach(Quadrant.allCases) { quadrant in
                     NavigationLink {
@@ -133,6 +208,7 @@ struct IOSQuadrantsHomeView: View {
                             quadrant: quadrant,
                             tasks: pendingTasks(for: quadrant)
                         )
+                        .frame(height: 190)
                     }
                     .buttonStyle(.plain)
                 }
@@ -170,5 +246,11 @@ struct IOSQuadrantsHomeView: View {
 
                 return lhs < rhs
             }
+    }
+
+    private func refreshWidgetSnapshot() {
+        #if os(iOS)
+        WidgetDataService.refreshSnapshot(context: modelContext)
+        #endif
     }
 }

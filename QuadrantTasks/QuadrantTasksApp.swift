@@ -15,7 +15,10 @@ import SwiftData
 struct QuadrantTasksApp: App {
 
     let sharedModelContainer: ModelContainer = {
-        let schema = Schema([TaskItem.self])
+        let schema = Schema([
+            TaskItem.self,
+            SubTask.self
+        ])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
             return try ModelContainer(for: schema, configurations: [config])

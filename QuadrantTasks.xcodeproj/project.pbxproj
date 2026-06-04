@@ -49,7 +49,10 @@
 		3D57C00C2FCCC5E20063D973 /* Exceptions for "QuadrantTasks" folder in "QuadrantTasksIOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Models/AppColorPalette.swift,
+				Models/ColorVisionMode.swift,
 				Models/Quadrant.swift,
+				Models/SubTask.swift,
 				Models/TaskItem.swift,
 				Services/NotificationService.swift,
 				ViewModels/TaskViewModel.swift,
@@ -525,7 +528,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuadrantTasksIOS/QuadrantTasksIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AW8GKH2ZA3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
@@ -540,7 +543,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dozeduck.eisenhowermatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -561,7 +564,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuadrantTasksIOS/QuadrantTasksIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AW8GKH2ZA3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "艾森豪威尔矩阵";
@@ -576,7 +579,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dozeduck.eisenhowermatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -598,7 +601,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuadrantTasksWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AW8GKH2ZA3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QuadrantTasksWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = QuadrantTasksWidget;
@@ -610,7 +613,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS.QuadrantTasksWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dozeduck.eisenhowermatrix.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -631,7 +634,7 @@
 				CODE_SIGN_ENTITLEMENTS = QuadrantTasksWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AW8GKH2ZA3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QuadrantTasksWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = QuadrantTasksWidget;
@@ -643,7 +646,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DOZEDUCK.QuadrantTasksIOS.QuadrantTasksWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dozeduck.eisenhowermatrix.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
