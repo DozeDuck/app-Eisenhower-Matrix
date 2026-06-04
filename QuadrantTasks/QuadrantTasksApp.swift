@@ -64,7 +64,7 @@ struct QuadrantTasksApp: App {
 
             // Help → 替换为我们自己的链接
             CommandGroup(replacing: .help) {
-                Link("艾森豪威尔矩阵介绍",
+                Link("干点正事儿介绍",
                      destination: URL(string: "https://zh.wikipedia.org/wiki/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86")!)
             }
         }

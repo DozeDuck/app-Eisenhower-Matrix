@@ -238,7 +238,7 @@ struct QuadrantTasksWidget: Widget {
         ) { entry in
             QuadrantTasksWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("象限任务")
+        .configurationDisplayName("干点正事儿")
         .description("选择一个象限，在桌面上快速查看未完成任务。")
         .supportedFamilies([.systemSmall])
     }

@@ -24,7 +24,7 @@ enum IOSHomeLayoutStyle: String, CaseIterable, Identifiable {
         case .list:
             return "更适合阅读任务预览"
         case .matrix:
-            return "更接近传统艾森豪威尔矩阵"
+            return "更适合按轻重缓急整理正事"
         }
     }
 

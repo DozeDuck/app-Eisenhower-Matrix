@@ -18,11 +18,6 @@ struct IOSQuadrantsHomeView: View {
 
     @State private var showingAddTask = false
 
-    private let matrixColumns = [
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12)
-    ]
-
     private var layoutStyle: IOSHomeLayoutStyle {
         IOSHomeLayoutStyle(rawValue: layoutStyleRaw) ?? .matrix
     }
@@ -36,22 +31,26 @@ struct IOSQuadrantsHomeView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                header
-                quadrantSummaryStrip
+        GeometryReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: adaptiveVerticalSpacing(for: proxy.size)) {
+                    header
+                    quadrantSummaryStrip
 
-                switch layoutStyle {
-                case .list:
-                    listLayout
+                    switch layoutStyle {
+                    case .list:
+                        listLayout
 
-                case .matrix:
-                    matrixLayout
+                    case .matrix:
+                        matrixLayout(availableSize: proxy.size)
+                    }
                 }
+                .padding(adaptiveOuterPadding(for: proxy.size))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(minHeight: proxy.size.height, alignment: .top)
             }
-            .padding()
+            .background(Color(.systemGroupedBackground))
         }
-        .background(Color(.systemGroupedBackground))
         .navigationTitle(AppInfo.displayName)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -71,6 +70,9 @@ struct IOSQuadrantsHomeView: View {
                 .environment(\.colorVisionMode, colorVisionMode)
         }
         .onAppear {
+            refreshWidgetSnapshot()
+        }
+        .onChange(of: colorVisionMode.rawValue) { _, _ in
             refreshWidgetSnapshot()
         }
     }
@@ -197,9 +199,15 @@ struct IOSQuadrantsHomeView: View {
         }
     }
 
-    private var matrixLayout: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            LazyVGrid(columns: matrixColumns, spacing: 12) {
+    private func matrixLayout(availableSize: CGSize) -> some View {
+        let gridSpacing = adaptiveGridSpacing(for: availableSize)
+        let cardHeight = adaptiveMatrixCardHeight(for: availableSize)
+
+        return VStack(alignment: .leading, spacing: 12) {
+            LazyVGrid(
+                columns: adaptiveMatrixColumns(for: availableSize),
+                spacing: gridSpacing
+            ) {
                 ForEach(Quadrant.allCases) { quadrant in
                     NavigationLink {
                         IOSQuadrantDetailView(quadrant: quadrant)
@@ -208,7 +216,7 @@ struct IOSQuadrantsHomeView: View {
                             quadrant: quadrant,
                             tasks: pendingTasks(for: quadrant)
                         )
-                        .frame(height: 190)
+                        .frame(height: cardHeight)
                     }
                     .buttonStyle(.plain)
                 }
@@ -219,6 +227,54 @@ struct IOSQuadrantsHomeView: View {
                 .foregroundStyle(.secondary)
                 .padding(.top, 2)
         }
+    }
+
+    private func adaptiveMatrixColumns(for size: CGSize) -> [GridItem] {
+        let spacing = adaptiveGridSpacing(for: size)
+
+        return [
+            GridItem(.flexible(), spacing: spacing),
+            GridItem(.flexible(), spacing: spacing)
+        ]
+    }
+
+    private func adaptiveMatrixCardHeight(for size: CGSize) -> CGFloat {
+        let isLargeCanvas = size.width >= 700 && size.height >= 650
+
+        if !isLargeCanvas {
+            return 190
+        }
+
+        let outerPadding = adaptiveOuterPadding(for: size)
+        let gridSpacing = adaptiveGridSpacing(for: size)
+
+        // 大致预留：标题区、说明文字、summary、上下 padding、底部提示。
+        let reservedForHeaderAndSummary: CGFloat = 205
+        let reservedForHint: CGFloat = 32
+
+        let availableHeight =
+            size.height
+            - reservedForHeaderAndSummary
+            - reservedForHint
+            - outerPadding * 2
+            - gridSpacing
+
+        let rawCardHeight = availableHeight / 2
+
+        // iPad 上放大，但不无限变高，避免卡片显得太空。
+        return min(max(rawCardHeight, 240), 420)
+    }
+
+    private func adaptiveOuterPadding(for size: CGSize) -> CGFloat {
+        size.width >= 700 ? 20 : 16
+    }
+
+    private func adaptiveGridSpacing(for size: CGSize) -> CGFloat {
+        size.width >= 700 ? 16 : 12
+    }
+
+    private func adaptiveVerticalSpacing(for size: CGSize) -> CGFloat {
+        size.width >= 700 ? 20 : 16
     }
 
     private func toggleLayoutStyle() {

@@ -52,7 +52,7 @@ struct MainView: View {
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(NSColor.windowBackgroundColor))
-        .navigationTitle("艾森豪威尔矩阵")
+        .navigationTitle("干点正事儿")
         .navigationSubtitle("\(totalPending) 项未完成")
         .toolbar {
             ToolbarItemGroup {

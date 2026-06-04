@@ -12,10 +12,10 @@ enum AppInfo {
 
     /// 请在重新提交审核前替换为最终 App Store 名称。
     /// 例如："DozeMatrix 今日优先级" 或 "先做什么"
-    static let displayName = "艾森豪威尔矩阵"
+    static let displayName = "干点正事儿"
 
     static let version = "1.0"
 
     /// 隐私政策 URL。请替换为你最终公开可访问的 GitHub Pages / 网站链接。
-    static let privacyPolicyURLString = "https://dozeduck.github.io/app-Eisenhower-Matrix/privacy.html"
+    static let privacyPolicyURLString = "https://github.com/DozeDuck/app-Eisenhower-Matrix/blob/main/privacy.html"
 }
